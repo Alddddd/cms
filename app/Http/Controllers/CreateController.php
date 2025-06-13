@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-
 use Illuminate\Http\Request;
 
-class PostsController extends Controller
+class CreateController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-  public function index()
-{
-    $posts = Post::all();
-    return view('posts.index', compact('posts'));
-}
+    public function index($id)
+    {
+      return "Returning this " . $id;
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +23,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view ('posts.create');
+        //
     }
 
     /**
@@ -37,14 +34,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-
-         Post::create($request->all());
-
-        // return $request->all();
-
-       
-      return redirect()->route('posts.index');
-        
+        //
     }
 
     /**
@@ -55,11 +45,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-
-
-        $post = Post::findOrFail($id);
-
-        return view ('posts.show', compact('post'));
+        return "This is an " . $id;
     }
 
     /**
@@ -70,12 +56,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        
-        $post = Post::findOrFail($id);
-
-        return view ('posts.edit', compact('post'));
-
-
+        //
     }
 
     /**
@@ -87,15 +68,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-       $post = Post::findOrFail($id);
-
-       $post->update($request->all());
-
-       return redirect('/posts');
-
-
-
+        //
     }
 
     /**
@@ -104,25 +77,29 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-public function destroy($id)
-{
-    $post = Post::findOrFail($id); 
-    $post->delete();              
-    return redirect('/posts');    
-}
-
-
-    public function contact()
+    public function destroy($id)
     {
-        return view ('contact');
+        //
     }
 
-    
-    public function show_post($id, $name, $password)
-    {
-        return view ('post', compact('id', 'name', 'password'));
+    public function make_me1 ($name, $password) {
+        return view ('call', compact('name', 'password'));
     }
 
+    public function make_me2 ($name, $password) {
+        return view ('make', compact('name', 'password'));
+    }
+
+    public function make_me ($name, $password) {
+        return view ('app', compact('name', 'password'));
+    }
+
+    public function people_list () {
+
+        $people = ['Ald', 'Onisgam', 'Cham'];
+
+        return view ('app', compact('people'));
+
+    }
 
 }
